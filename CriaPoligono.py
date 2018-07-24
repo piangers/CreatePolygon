@@ -40,6 +40,9 @@ class CriaPoligono(GeometricaAcquisition):
                 geom = QgsGeometry.fromPolyline(self.geometry + [self.geometry[0]])
             self.rubberBand.setToGeometry(geom, None)
             self.createGeometry(geom)
+
+    def canvasPressEvent(self, event):
+        pass
   
     def canvasReleaseEvent(self, event):
         event.snapPoint(QgsMapMouseEvent.SnapProjectConfig) #snap!!!
@@ -74,6 +77,11 @@ class CriaPoligono(GeometricaAcquisition):
                         self.geometry.append(QgsPoint(testgeom.x(), testgeom.y()))        
                 self.qntPoint += 1
                
+    # def canvasMoveEvent(self, event):
+    #     x = event.pos().x()
+    #     y = event.pos().y()
+    #     point = self.canvas.getCoordinateTransform().toMapCoordinates(x, y)
+
     def canvasMoveEvent(self, event):
         if self.snapCursorRubberBand:
             self.snapCursorRubberBand.hide()
